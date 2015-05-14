@@ -1,34 +1,16 @@
-var gulp = require('gulp'),
-	uglify = require('gulp-uglify'),
-	sass = require('gulp-sass'),
-	less = require('gulp-less'),
-	include = require('gulp-include'),
-	plumber = require('gulp-plumber'),
-	minifyCss = require('gulp-minify-css');
+var elixir = require('laravel-elixir');
 
-// scripts uglify
-gulp.task('scripts', function() {
-	gulp.src(['_/components/js/myscript.js', '_/components/js/bootstrap.js'])
-		.pipe(plumber())
-		.pipe(include())
-		.pipe(uglify())
-		.pipe(gulp.dest('_/js'))
-		.pipe(livereload());
+/*
+ |--------------------------------------------------------------------------
+ | Elixir Asset Management
+ |--------------------------------------------------------------------------
+ |
+ | Elixir provides a clean, fluent API for defining some basic Gulp tasks
+ | for your Laravel application. By default, we are compiling the Less
+ | file for our application, as well as publishing vendor resources.
+ |
+ */
+
+elixir(function(mix) {
+    mix.less('app.less');
 });
-
-// minify css
-gulp.task('minify-css', function() {
-  	gulp.src('assets/sass/*.scss')
-  		.pipe(plumber())
-		.pipe(sass())
-    	.pipe(minifyCss())
-    	.pipe(gulp.dest('css'))
-});
-
-// watch
-gulp.task('watch', function() {
-	gulp.watch('_/components/js/myscript.js', ['scripts']);
-	gulp.watch('_/components/less/mystyle.less', ['minify-css']);
-});
-
-gulp.task('default', ['scripts', 'minify-css', 'watch']);
