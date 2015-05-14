@@ -1,0 +1,10 @@
+$font-stack:    Verdana;
+$primary-color: #CCC;
+
+body {
+	font: 100% $font-stack;
+	color: $primary-color;
+	a {
+		display: block;
+	}
+}
